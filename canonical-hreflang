@@ -1,0 +1,58 @@
+ <!--CANONICAL V HREFLang NO INDEX LOOP SE 11/14 FOR SHOPIFY THEME FILE -->    
+{% if template == 'product' %}
+    {% if collection %}
+    <meta name="robots" content="noindex,follow" />
+    <link rel="canonical" href="{{ shop.url }}{{ product.url }}" />
+    {% endif %}
+    {% elsif template == 'Collection' %}
+    {% if collection %}
+    <meta name="robots" content="noindex,follow" />
+    <link rel="canonical" href="{{ shop.url }}{{ collection.url }}" />
+    {% endif %}
+    {% elsif template == 'search' %}
+    {% if collection %}
+    <meta name="robots" content="noindex,follow" />
+    <link rel="canonical" href="{{ shop.url }}{{ search.url }}" />
+    {% endif %}
+    {% elsif template == 'page' %}
+    {% if collection %}
+    <meta name="robots" content="noindex,follow" />
+    <link rel="canonical" href="{{ shop.url }}{{ page.url }}" />
+    {% endif %}
+    {% elsif template contains 'collection' and current_tags %}
+<meta name="robots" content="noindex,follow" />
+<link rel="canonical" href="{{ collection.url }}{{ product.url }}" />
+{% else %}
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="{{ canonical_url }}" />
+    <!--Self reference HREFLang --> 
+<link rel="alternate" href="{{ canonical_url }}" hreflang="en-US" />
+<!-- HREFLang for NON EUROPE ENGLISH -->
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'invisibleworld.com' }}" hreflang="en" />
+<!-- HREFLang for EUROPE -->
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-GB" />
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-DE" />
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-FR" />
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-IT" />
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-ES" />
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-AT" />
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-BE" />
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-CH" />
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-CZ" />
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-DK" />
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-FI" />
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-GR" />
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-HU" />
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-HR" />
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-IE" />
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-IS" />
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-LU" />
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-NO" />
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-NL" />
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-PL" />
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-PT" />
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-RO" />
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-SE" />
+<!-- HREFLang for REST OF WORLD -->
+<link rel="alternate" hreflang="x-default" href="{{ canonical_url | replace: shop.domain, 'invisibleworld.com' }}" />
+    {% endif %}
