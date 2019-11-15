@@ -1,36 +1,44 @@
- <!--CANONICAL V HREFLang NO INDEX LOOP SE 11/14 FOR SHOPIFY THEME FILE -->    
-{% if template == 'product' %}
-    {% if collection %}
-    <meta name="robots" content="noindex,follow" />
+<!--CANONICAL VS HREFLang LOOP SE 11/14-->   
+    
+    {% if template == 'product' %}{% if collection %}
     <link rel="canonical" href="{{ shop.url }}{{ product.url }}" />
-    {% endif %}
-    {% elsif template == 'Collection' %}
-    {% if collection %}
-    <meta name="robots" content="noindex,follow" />
+    {% endif %}{% endif %}
+    
+    {% if template == 'Collection' %}{% if collection %}
     <link rel="canonical" href="{{ shop.url }}{{ collection.url }}" />
-    {% endif %}
-    {% elsif template == 'search' %}
-    {% if collection %}
-    <meta name="robots" content="noindex,follow" />
+    {% endif %}{% endif %}
+    
+    {% if template == 'search' %}{% if collection %}
     <link rel="canonical" href="{{ shop.url }}{{ search.url }}" />
-    {% endif %}
-    {% elsif template == 'page' %}
-    {% if collection %}
-    <meta name="robots" content="noindex,follow" />
+    {% endif %}{% endif %}
+   
+    {% if template == 'page' %}{% if collection %}
     <link rel="canonical" href="{{ shop.url }}{{ page.url }}" />
+    {% endif %}{% endif %}
+    
+    {% if template contains 'collection' and current_tags %}
+    <link rel="canonical" href="{{ collection.url }}{{ product.url }}" />
+    {% else %}
+    <link rel="canonical" href="{{ canonical_url }}" />
     {% endif %}
-    {% elsif template contains 'collection' and current_tags %}
-<meta name="robots" content="noindex,follow" />
-<link rel="canonical" href="{{ collection.url }}{{ product.url }}" />
-{% else %}
-<meta name="robots" content="index,follow">
-<link rel="canonical" href="{{ canonical_url }}" />
+    
+
+{% capture the_url %}{{ canonical_url }}{% endcapture %}
+{% capture test_url %}https://eu.invisibleworld.com{{ request.path }}{% endcapture %}
+
+{% if product.selected_variant ||  if current_page >=1 %}
+{% assign test_url = "noindex" %}
+{% endif %}    
+
+
+{% if the_url == test_url %}
+  <meta name="robots" content="index,follow">    
     <!--Self reference HREFLang --> 
-<link rel="alternate" href="{{ canonical_url }}" hreflang="en-US" />
+<link rel="alternate" href="{{ canonical_url }}" hreflang="en-GB" />
 <!-- HREFLang for NON EUROPE ENGLISH -->
 <link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'invisibleworld.com' }}" hreflang="en" />
+<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'invisibleworld.com' }}" hreflang="en-US" />
 <!-- HREFLang for EUROPE -->
-<link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-GB" />
 <link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-DE" />
 <link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-FR" />
 <link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-IT" />
@@ -55,4 +63,11 @@
 <link rel="alternate" href="{{ canonical_url | replace: shop.domain, 'eu.invisibleworld.com' }}" hreflang="en-SE" />
 <!-- HREFLang for REST OF WORLD -->
 <link rel="alternate" hreflang="x-default" href="{{ canonical_url | replace: shop.domain, 'invisibleworld.com' }}" />
+  
+    
+{% else %}    
+     <meta name="robots" content="noindex,follow" />  
+
     {% endif %}
+    
+<!-- END CANONICAL VS HREFLang LOOP SE 11/14-->     
