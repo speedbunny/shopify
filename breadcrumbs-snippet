@@ -1,0 +1,89 @@
+<div style="display: none;">
+{% unless template == 'index' or template == 'cart' or template == 'list-collections' %}
+<nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+<ol vocab="https://schema.org/" typeof="BreadcrumbList">
+  <li property="itemListElement" typeof="ListItem">
+    <a property="item" typeof="WebPage"
+        href="https://illariy.com.au/">
+      <span property="name">Home</span></a>
+    <meta property="position" content="1">
+  </li>
+  ,
+ {% if template contains 'page' %}
+  <li property="itemListElement" typeof="ListItem">
+    <a property="item" typeof="WebPage"
+        href="{{ page.url }}">
+      <span property="name">{{ page.title }}</span></a>
+    <meta property="position" content="2">
+  </li>
+  ,
+    {% elsif template contains 'product' %}
+    {% if collection.url %}
+  <li property="itemListElement" typeof="ListItem">
+    <a property="item" typeof="WebPage"
+        href="{{ collection.url }}">
+      <span property="name">{{ collection.title }}</span></a>
+    <meta property="position" content="2">
+  </li>
+  ,
+    {% endif %}
+  {% elsif template contains 'collection' and collection.handle %}
+{% if current_tags %}
+  {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+<li property="itemListElement" typeof="ListItem">
+    <a property="item" typeof="WebPage"
+        href="{{ url }}">
+      <span property="name">{{ collection.handle }}</span></a>
+    <meta property="position" content="2">
+  </li>
+  ,
+{% else %}  
+  <li property="itemListElement" typeof="ListItem">
+    <a property="item" typeof="WebPage"
+        href="{{ url }}">
+      <span property="name">{{ collection.title }}</span></a>
+    <meta property="position" content="2">
+  </li>
+  ,
+ {% endif %} 
+  {% elsif template == 'blog' %}
+   {% if current_tags %}
+  <li property="itemListElement" typeof="ListItem">
+    <a property="item" typeof="WebPage"
+        href="{{ blog.url }}">
+      <span property="name">{{ blog.title }}</span></a>
+    <meta property="position" content="2">
+  </li>
+  ,
+ 
+  {% else %}
+  <li property="itemListElement" typeof="ListItem">
+    <a property="item" typeof="WebPage"
+        href="{{ blog.url }}">
+      <span property="name">{{ blog.title }}</span></a>
+    <meta property="position" content="2">
+  </li>
+  ,
+     {% endif %}
+  {% elsif template == 'article' %}
+    <li property="itemListElement" typeof="ListItem">
+    <a property="item" typeof="WebPage"
+        href="{{ article.url }}">
+      <span property="name">{{ article.title }}</span></a>
+    <meta property="position" content="2">
+  </li>
+  ,
+    {% else %}
+
+    <li property="itemListElement" typeof="ListItem">
+    <a property="item" typeof="WebPage"
+        href="{{ article.url }}">
+      <span property="name">{{ page_title }}</span></a>
+    <meta property="position" content="2">
+  </li>
+  , 
+    {% endif %}
+</ol>
+  </nav>
+</div>
+{% endunless %}
